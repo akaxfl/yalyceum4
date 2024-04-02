@@ -1,4 +1,6 @@
-﻿from flask import Flask, render_template
+import os
+
+from flask import Flask, render_template
 from flask_restful import Api
 from flask_login import LoginManager
 
@@ -35,6 +37,8 @@ def main():
     api.add_resource(users_resources.UsersResource, '/api/v2/users/<int:user_id>')
     api.add_resource(jobs_resources.JobsListResource, '/api/v2/jobs')
     api.add_resource(jobs_resources.JobsResource, '/api/v2/jobs/<int:job_id>')
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
     app.run()
 
 
